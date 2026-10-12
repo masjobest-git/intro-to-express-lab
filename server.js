@@ -26,7 +26,8 @@ app.get("/roll/:number", (req, res) => {
     if (isNaN(number)) {
         res.send("You must specify a number.");
     } else {
-        res.send("You rolled a " + number);
+        const randomNumber = parseInt(Math.random() * (Number(number) + 1));
+        res.send("You rolled a " + randomNumber);
     }
 });
 
