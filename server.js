@@ -61,6 +61,17 @@ const shoes = [
     { name: "Fifty-Inch Heels", price: 175, type: "heel" }
 ];
 
+app.get('/shoes', (req, res) => {
+    const { 'min-price': min, 'max-price': max, type } = req.query;
+    const result = shoes.filter(shoe => {
+        if (min && shoe.price < Number(min)) return false;
+        if (max && shoe.price > Number(max)) return false;
+        if (type && shoe.type.toLowerCase() !== type.toLowerCase()) return false;
+        return true;
+    });
+
+    res.send(result);
+});
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
